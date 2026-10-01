@@ -1,0 +1,18 @@
+Cloud in a Bottle packaging for Calibre-Web
+
+The MIT license in LICENSE applies to the original Cloud in a Bottle
+packaging and integration code in this repository, including its original
+authentication proxy, app-specific initialization, manifest, and documentation.
+
+Upstream software and material retain their own licenses and copyright notices:
+- Calibre-Web: https://github.com/janeczku/calibre-web
+- Calibre: https://github.com/kovidgoyal/calibre
+- LinuxServer container packaging: https://github.com/linuxserver/docker-calibre-web
+
+In particular, calibre_metadata_sqlite.sql is copied from Calibre's
+resources/metadata_sqlite.sql and retains Calibre's license. Material derived
+from LinuxServer's init-calibre-web-config and svc-calibre-web scripts under
+root/etc/s6-overlay/s6-rc.d/ retains its upstream license. The MIT grant
+covers only our original additions, not those copied or adapted portions.
+
+Dependencies and software supplied by base images retain their own terms.
