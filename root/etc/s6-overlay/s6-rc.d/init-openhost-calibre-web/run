@@ -37,7 +37,7 @@
 
 set -e
 
-PERSIST=/config  # TEMP: show test_config_and_library_in_app_data fails
+PERSIST="${OPENHOST_APP_DATA_DIR:-/data/app_data/calibre-web}"
 CONFIG_DIR="$PERSIST/config"
 BOOKS_DIR="$PERSIST/books"
 APP_DB="$CONFIG_DIR/app.db"
@@ -155,7 +155,7 @@ EOS
 # only stamps X-Openhost-User for authenticated owners; anonymous traffic
 # still hits the upstream login form, where admin/admin123 would be a
 # trivial takeover.
-if false; then  # TEMP: keep admin/admin123 to show test_anonymous_gets_login_form fails
+if [ ! -f "$OPENHOST_INIT_SENTINEL" ]; then
     echo "[init-openhost] first-boot: randomising admin password"
     # Calibre-Web's default password policy (config_password_policy = 1 in
     # app.db) requires at least one uppercase, one lowercase, one digit,

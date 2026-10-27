@@ -12,7 +12,7 @@
 # See root/etc/s6-overlay/s6-rc.d/init-calibre-web-config/run for the
 # matching first-boot init that lives at the same persistent path.
 
-PERSIST=/config  # TEMP: show test_config_and_library_in_app_data fails
+PERSIST="${OPENHOST_APP_DATA_DIR:-/data/app_data/calibre-web}"
 export CALIBRE_DBPATH="$PERSIST/config"
 
 # `cd /app/calibre-web` ensures the Calibre-Web source tree is in the
