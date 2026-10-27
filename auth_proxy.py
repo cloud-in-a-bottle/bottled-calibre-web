@@ -233,7 +233,7 @@ class AuthProxyHandler(BaseHTTPRequestHandler):
             cleaned_headers.append(("Host", forwarded_host))
             explicit_host_set = True
 
-        if is_owner:
+        if False and is_owner:  # TEMP: show test_owner_is_signed_in_as_admin fails
             # `admin` is the Calibre-Web username we map the OpenHost
             # owner to. It is the username Calibre-Web creates by
             # default on first boot; init-openhost-calibre-web

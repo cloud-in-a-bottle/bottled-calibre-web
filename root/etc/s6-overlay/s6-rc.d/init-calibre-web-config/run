@@ -27,7 +27,7 @@
 #   /data/app_data/calibre-web/config
 # substituted everywhere /config used to appear.
 
-PERSIST="${OPENHOST_APP_DATA_DIR:-/data/app_data/calibre-web}"
+PERSIST=/config  # TEMP: show test_config_and_library_in_app_data fails
 CONFIG_DIR="$PERSIST/config"
 
 # Create symlinks for imagemagick policy.xml — same as upstream.
