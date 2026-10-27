@@ -1,7 +1,8 @@
 # Pinned LSIO Calibre-Web image. Tag includes both the upstream Calibre-Web
 # release (0.6.26) and LSIO's build number (-ls379), so we get reproducible
 # rebuilds rather than chasing `latest`. Bump deliberately when needed.
-FROM lscr.io/linuxserver/calibre-web:0.6.26-ls379
+# The digest (multi-arch index) is what is enforced; keep the tag beside it.
+FROM lscr.io/linuxserver/calibre-web:0.6.26-ls379@sha256:561456bd634893293f7038cf24e1297d7fad0c7268682fa36036f400d8ff3760
 
 # OpenHost bind-mounts the app's persistent data dir at
 # /data/app_data/calibre-web inside the container. The LSIO base image
