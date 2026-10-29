@@ -131,13 +131,26 @@ fi
 # global toggle is all that's needed for uploads to work out of the box.
 # We set it in the same idempotent UPDATE so it re-converges on every boot
 # even if someone toggles it off through the admin UI.
+#
+# Since 0.6.27 Calibre-Web only honours the login header from a trusted
+# proxy address (config_reverse_proxy_trusted_ips, default "127.0.0.1,::1").
+# Calibre-Web listens dual-stack, so our auth-proxy's loopback connection
+# arrives as the IPv4-mapped "::ffff:127.0.0.1", which the default doesn't
+# match (janeczku/calibre-web#3676). Trust loopback in all three spellings.
+# Calibre-Web only adds that column when it starts, which is after this
+# script on an upgrade, so add it here first if it's missing (its own
+# migration then sees the column and leaves it alone).
 echo "[init-openhost] patching $APP_DB settings"
+if ! sqlite3 "$APP_DB" "SELECT name FROM pragma_table_info('settings') WHERE name = 'config_reverse_proxy_trusted_ips';" | grep -q .; then
+    sqlite3 "$APP_DB" "ALTER TABLE settings ADD COLUMN config_reverse_proxy_trusted_ips VARCHAR DEFAULT '127.0.0.1,::1';"
+fi
 BOOKS_DIR_FOR_SQL=${BOOKS_DIR//\'/\'\'}
 sqlite3 "$APP_DB" <<EOS
 UPDATE settings SET
     config_calibre_dir = '$BOOKS_DIR_FOR_SQL',
     config_allow_reverse_proxy_header_login = 1,
     config_reverse_proxy_login_header_name = 'X-Openhost-User',
+    config_reverse_proxy_trusted_ips = '127.0.0.1,::1,::ffff:127.0.0.1',
     config_uploading = 1
 WHERE id = 1;
 EOS
