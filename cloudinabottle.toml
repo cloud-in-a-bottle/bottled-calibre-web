@@ -1,10 +1,13 @@
 [app]
 name = "calibre-web"
-version = "0.1.0"
+version = "1.0.0"
 description = "Calibre-Web ebook server with Cloud in a Bottle owner SSO"
 
 [runtime.container]
 image = "Dockerfile"
+# Cloud in a Bottle pulls this signed prebuilt image (built from the release tag's commit by CI) instead of building
+# `image`. If you fork this app and change it, comment this line out so your instance builds `image` instead.
+prebuilt_image = "registry.cloudinabottle.org/bottled-calibre-web"
 # Port 8080 is the auth-proxy sidecar inside the container. Calibre-Web
 # itself binds 8083 internally; the sidecar terminates the OpenHost
 # router's connection and forwards there with `X-Openhost-User: admin`
