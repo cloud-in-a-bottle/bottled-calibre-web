@@ -88,6 +88,8 @@ admin UI.
 | `memory_mb` | 768 | Calibre-Web + ImageMagick (cover thumbnails) + Python. |
 | `cpu_millicores` | 500 | Spikes during cover thumbnail generation. |
 
+`cloudinabottle.toml` sets `prebuilt_image`, so Cloud in a Bottle pulls our signed prebuilt image (built by CI from each release tag) instead of building the Dockerfile. To fork and modify this app, comment out `prebuilt_image` so your instance builds from source.
+
 ## Caveats
 
 - **Library starts empty.** If you have an existing Calibre library on
