@@ -1,6 +1,7 @@
 [app]
 name = "calibre-web"
-version = "1.0.0"
+version = "1.0.1"
+release_tag_format = "semver"
 description = "Calibre-Web ebook server with Cloud in a Bottle owner SSO"
 
 [runtime.container]
